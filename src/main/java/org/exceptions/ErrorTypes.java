@@ -1,0 +1,5 @@
+package org.exceptions;
+
+public enum ErrorTypes{
+    INTERNAL_SERVER_ERROR, INVALID_PARAMS, INVALID_DATA_PROVIDED, LOCK_EXCEPTION, NOT_FOUND
+}
