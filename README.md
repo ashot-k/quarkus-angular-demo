@@ -4,7 +4,13 @@ A Demo Quarkus / Angular fullstack mini project.
 The application performs crud operations between authors and their books that exist in a many-to-many relationship
 through a RESTful API.
 
-### Setup
+### Prerequisites
+
+* Java 21
+* PostgreSQL (or any other RDBMS)
+* Angular 18.2.0
+
+### Quarkus backend Setup
 
 Create an `application.properties` file under src/main/resources with details in regards to the dataSource of your
 liking.
@@ -25,8 +31,9 @@ The application can be packaged using:
 
 Afterward the application can be run using the command `java -jar target/quarkus-app/quarkus-run.jar`.
 
-### Prerequisites
+### Angular setup
 
-* Java 21
-* PostgreSQL (or any other RDBMS)
-
+Add your quarkus URL to the environment files and run the angular app (after ```cd angular-demo-app```) using: 
+```shell script
+ng serve
+```
