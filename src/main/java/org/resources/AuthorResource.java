@@ -1,7 +1,9 @@
 package org.resources;
 
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
 import org.entities.Author;
 import org.jboss.resteasy.reactive.RestResponse;
 import org.services.AuthorService;
@@ -15,7 +17,7 @@ public class AuthorResource {
     AuthorService authorService;
 
     @POST
-    public RestResponse<Author> addAuthor(Author author) {
+    public RestResponse<Author> addAuthor(@Valid Author author) {
         return RestResponse.status(RestResponse.Status.CREATED, authorService.addAuthor(author));
     }
 
@@ -27,8 +29,8 @@ public class AuthorResource {
 
     @GET
     @Path("/{id}")
-    public RestResponse<Author> getAuthor(@PathParam("id") Long id) {
-        return RestResponse.ok(authorService.getAuthor(id));
+    public RestResponse<Author> getAuthor(@PathParam("id") String id) {
+        return RestResponse.ok(authorService.getAuthor(Long.parseLong(id)));
     }
 
     @PUT
@@ -41,10 +43,9 @@ public class AuthorResource {
     @Path("/{id}")
     public RestResponse<String> deleteAuthor(@PathParam("id") Long id) {
         if (authorService.deleteAuthor(id)) {
-            return RestResponse.ok("Author deleted");
-        } else {
-            return RestResponse.status(404, "Could not Find author with id: " + id);
+            return RestResponse.ok("Author: " + id + " deleted");
         }
+        return RestResponse.status(Response.Status.INTERNAL_SERVER_ERROR, "Error when deleting author: " + id);
     }
 
 }

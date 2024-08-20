@@ -99,7 +99,7 @@ public class BookServiceImpl implements BookService {
         Book book = bookRepo.findById(id);
         List<Author> authors = book.getAuthors();
         for (Author author : authors) {
-            author.getBooks().remove(book);  // Remove the book from the author's book list
+            author.getBooks().remove(book);
         }
         bookRepo.delete(book);
     }

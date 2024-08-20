@@ -1,8 +1,9 @@
 package org.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 
@@ -16,9 +17,10 @@ public class Book extends PanacheEntityBase {
     @Column(name = "book_id")
     private Long id;
     @Column(nullable = false)
+    @NotEmpty(message = "Book title must be specified and not be empty")
     private String title;
     @ManyToMany(mappedBy = "books")
-    @JsonbTransient
+    @JsonIgnore
     private List<Author> authors;
     @Column
     private String image;

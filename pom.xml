@@ -58,8 +58,7 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest-jsonb</artifactId>
-            <version>3.13.2</version>
+            <artifactId>quarkus-rest-jackson</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>

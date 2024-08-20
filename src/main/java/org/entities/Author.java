@@ -1,8 +1,10 @@
 package org.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -14,9 +16,11 @@ public class Author extends PanacheEntityBase {
     @Column(name = "author_id")
     private Long id;
     @Column(nullable = false)
+    @NotEmpty(message = "Author name must be specified and not be empty")
     private String name;
     @Column(nullable = false)
-    private short age;
+    @NotNull(message = "Author age must be specified")
+    private Short age;
     @Version
     private Long version;
 
@@ -25,7 +29,7 @@ public class Author extends PanacheEntityBase {
             , joinColumns = @JoinColumn(name = "author_id")
             , inverseJoinColumns = @JoinColumn(name = "book_id")
     )
-    @JsonbTransient
+    @JsonIgnore
     private List<Book> books;
 
     public Author() {
